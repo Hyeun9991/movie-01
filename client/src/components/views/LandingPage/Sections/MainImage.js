@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 function MainImage({ image, title, text }) {
-  console.log(image);
   return (
     <MainImageContainer image={image}>
       <div>
