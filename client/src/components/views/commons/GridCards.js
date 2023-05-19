@@ -34,6 +34,7 @@ const GridItem = styled.div`
 `;
 const MovieImage = styled.img`
   width: 100%;
+  min-height: 310px;
   height: auto;
 `;
 

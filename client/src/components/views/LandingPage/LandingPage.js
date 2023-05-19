@@ -7,19 +7,38 @@ import GridCards from '../commons/GridCards';
 function LandingPage() {
   const [Movies, setMovies] = useState([]);
   const [MainMovieImage, setMainMovieImage] = useState(null);
+  const [CurrentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
+    // load되자마자 첫 번째 페이지(page=1)를 파라미터로 줌
     const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=ko&page=1`;
+    fetchMovies(endpoint);
+  }, []);
 
+  const fetchMovies = (endpoint) => {
     // 현재 인기있는 영화 20개 데이터 가져오기
     fetch(endpoint)
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
-        setMovies([...response.results]);
-        setMainMovieImage(response.results[0]);
+        // ...: 리스트 내부에 있는 element들을 풀어주는 연산자
+        // setMovies([...response.results]); // 덮어씌움 (lead more 버튼을 눌러서 데이터를 가져와도 기존 데이터에 덮어씌인다.)
+        setMovies([...Movies, ...response.results]); // 두 리스트를 순서대로 합침
+
+        // 첫 번째 페이지의 첫 번째 영화 포스터 이미지로 MainMovie State Update
+        if (response.page === 1) {
+          setMainMovieImage(response.results[0]);
+        }
+
+        setCurrentPage(response.page); // 기본값: 1
       });
-  }, []);
+  };
+
+  const loadMoreItems = () => {
+    const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=ko&page=${
+      CurrentPage + 1
+    }`;
+    fetchMovies(endpoint);
+  };
 
   return (
     <Container>
@@ -58,7 +77,7 @@ function LandingPage() {
       </MainMoviesContainer>
 
       <LoadMoreButtonContainer>
-        <LoadMoreButton>Load More</LoadMoreButton>
+        <LoadMoreButton onClick={loadMoreItems}>Load More</LoadMoreButton>
       </LoadMoreButtonContainer>
     </Container>
   );
