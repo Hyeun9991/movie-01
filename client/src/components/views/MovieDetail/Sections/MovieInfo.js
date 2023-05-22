@@ -25,7 +25,7 @@ function MovieInfo({ movie }) {
   const movieGenres = genreList();
 
   return (
-    <Container>
+    <Container className="movie-info-container">
       <MovieTitle>{movieTitle}</MovieTitle>
       <DetailContainer>
         <VoteContainer>

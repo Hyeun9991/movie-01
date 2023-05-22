@@ -38,7 +38,7 @@ const InfoContainer = styled.div`
 `;
 const MovieTitle = styled.h2`
   color: #fff;
-  font-size: 24px;
+  font-size: 32px;
   margin-bottom: 0.5rem;
 `;
 const MovieDescription = styled.p`
@@ -47,6 +47,11 @@ const MovieDescription = styled.p`
   font-size: 14px;
   line-height: 1.3rem;
   opacity: 0.7;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `;
 
 export default MainImage;

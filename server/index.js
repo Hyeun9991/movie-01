@@ -18,7 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 // app.use('/uploads', express.static('uploads'));
 
+// routes 분리
 app.use('/api/users', require('./routes/users'));
+app.use('/api/favorite', require('./routes/favorite'));
 
 // 프로덕션 중인 경우 정적 애셋 제공
 if (process.env.NODE_ENV === 'production') {

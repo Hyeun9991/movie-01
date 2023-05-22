@@ -22,7 +22,7 @@ function GridCards({
   } else if (firstActor) {
     return (
       // first Actors
-      <FirstActorContainer>
+      <FirstActorContainer className="actor-item">
         <ActorProfileImageContainer>
           <img src={image} alt={firstCharacterName} />
         </ActorProfileImageContainer>
@@ -32,7 +32,7 @@ function GridCards({
   } else {
     return (
       // Actor col
-      <MoreActorContainer>
+      <MoreActorContainer className="actor-item">
         <ActorProfileImageContainer>
           <img src={image} alt={firstCharacterName} />
         </ActorProfileImageContainer>
@@ -72,8 +72,12 @@ const FirstActorContainer = styled.div`
   width: 60px;
 `;
 const MoreActorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 0.5rem;
   width: 60px;
+  flex-wrap: wrap;
 `;
 const ActorProfileImageContainer = styled.div`
   width: 55px;
@@ -97,6 +101,7 @@ const ActorName = styled.span`
   line-height: 1rem;
   text-align: center;
   opacity: 0.8;
+  width: 80%;
 `;
 
 export default GridCards;
