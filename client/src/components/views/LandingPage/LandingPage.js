@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../../Config';
 import GridCards from '../commons/GridCards';
 import MainImage from '../commons/MainImage';
+import Layout from '../../Layout/Layout';
 
 function LandingPage() {
   const [Movies, setMovies] = useState([]);
@@ -41,44 +42,47 @@ function LandingPage() {
   };
 
   return (
-    <Container>
-      {/* Main Image */}
-      {MainMovieImage && (
-        <MainImage
-          image={`${IMAGE_BASE_URL}w1280${MainMovieImage?.backdrop_path}`}
-          title={MainMovieImage.title}
-          text={MainMovieImage.overview}
-        />
-      )}
+    <Layout>
+      <Container>
+        {/* Main Image */}
+        {MainMovieImage && (
+          <MainImage
+            image={`${IMAGE_BASE_URL}w1280${MainMovieImage?.backdrop_path}`}
+            title={MainMovieImage.title}
+            text={MainMovieImage.overview}
+          />
+        )}
 
-      <MainMoviesContainer>
-        <SectionTitle>Movies by latest</SectionTitle>
+        <MainMoviesContainer>
+          <SectionTitle>Movies by latest</SectionTitle>
 
-        {/* Movie Grid Cards */}
-        <RowContainer>
-          {Movies &&
-            Movies.map((movie) => {
-              return (
-                <React.Fragment key={movie.id}>
-                  <GridCards
-                    image={
-                      movie.poster_path
-                        ? `${IMAGE_BASE_URL}w500${movie.poster_path}`
-                        : null
-                    }
-                    movieId={movie.id}
-                    movieName={movie.title}
-                  />
-                </React.Fragment>
-              );
-            })}
-        </RowContainer>
-      </MainMoviesContainer>
+          {/* Movie Grid Cards */}
+          <RowContainer>
+            {Movies &&
+              Movies.map((movie) => {
+                return (
+                  <React.Fragment key={movie.id}>
+                    <GridCards
+                      landingPage
+                      image={
+                        movie.poster_path
+                          ? `${IMAGE_BASE_URL}w500${movie.poster_path}`
+                          : null
+                      }
+                      movieId={movie.id}
+                      movieName={movie.title}
+                    />
+                  </React.Fragment>
+                );
+              })}
+          </RowContainer>
+        </MainMoviesContainer>
 
-      <LoadMoreButtonContainer>
-        <LoadMoreButton onClick={loadMoreItems}>Load More</LoadMoreButton>
-      </LoadMoreButtonContainer>
-    </Container>
+        <LoadMoreButtonContainer>
+          <LoadMoreButton onClick={loadMoreItems}>Load More</LoadMoreButton>
+        </LoadMoreButtonContainer>
+      </Container>
+    </Layout>
   );
 }
 

@@ -19,14 +19,12 @@ function App() {
 
   return (
     <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<AuthenticLandingPage />} />
-          <Route path="/login" element={<AuthenticLoginPage />} />
-          <Route path="/register" element={<AuthenticRegisterPage />} />
-          <Route path="/movie/:movieId" element={<AuthenticMovieDetail />} />
-        </Routes>
-      </Layout>
+      <Routes>
+        <Route path="/" element={<AuthenticLandingPage />} />
+        <Route path="/login" element={<AuthenticLoginPage />} />
+        <Route path="/register" element={<AuthenticRegisterPage />} />
+        <Route path="/movie/:movieId" element={<AuthenticMovieDetail />} />
+      </Routes>
     </Router>
   );
 }

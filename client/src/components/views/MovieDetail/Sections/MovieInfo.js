@@ -60,7 +60,7 @@ const Container = styled.div`
 `;
 
 const MovieTitle = styled.h1`
-  font-size: 56px;
+  font-size: 48px;
 `;
 
 const DetailContainer = styled.div`

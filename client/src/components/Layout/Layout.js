@@ -2,12 +2,12 @@ import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
 import styled from 'styled-components';
 
-function Layout(props) {
+function Layout({ children }) {
   return (
     <div>
       <Navbar />
 
-      <ContentContainer>{props.children}</ContentContainer>
+      <ContentContainer>{children}</ContentContainer>
 
       <Footer />
     </div>
