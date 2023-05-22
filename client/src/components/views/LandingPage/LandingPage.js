@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../../Config';
-import MainImage from './Sections/MainImage';
 import GridCards from '../commons/GridCards';
+import MainImage from '../commons/MainImage';
 
 function LandingPage() {
   const [Movies, setMovies] = useState([]);
@@ -45,15 +45,14 @@ function LandingPage() {
       {/* Main Image */}
       {MainMovieImage && (
         <MainImage
-          image={`${IMAGE_BASE_URL}w1280${MainMovieImage.backdrop_path}`}
+          image={`${IMAGE_BASE_URL}w1280${MainMovieImage?.backdrop_path}`}
           title={MainMovieImage.title}
           text={MainMovieImage.overview}
         />
       )}
 
       <MainMoviesContainer>
-        <h2>Movies by latest</h2>
-        <hr />
+        <SectionTitle>Movies by latest</SectionTitle>
 
         {/* Movie Grid Cards */}
         <RowContainer>
@@ -86,16 +85,40 @@ function LandingPage() {
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
+  background: linear-gradient(to bottom, white 80%, black);
 `;
 const MainMoviesContainer = styled.div`
   width: 85%;
-  margin: 1rem auto;
+  margin: 3rem auto;
+`;
+const SectionTitle = styled.h2`
+  font-size: 24px;
+  margin-bottom: 1rem;
 `;
 const LoadMoreButtonContainer = styled.div`
   display: flex;
+  align-items: center;
   justify-content: center;
+  height: 100px;
 `;
-const LoadMoreButton = styled.button``;
+const LoadMoreButton = styled.button`
+  border: none;
+  outline: none;
+  padding: 0.9rem 1.2rem;
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  cursor: pointer;
+  margin-bottom: 3rem;
+
+  &:hover {
+    background-color: #fff;
+    color: #000;
+  }
+`;
 const RowContainer = styled.div`
   display: flex;
   flex-wrap: wrap;

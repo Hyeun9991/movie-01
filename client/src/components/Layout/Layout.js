@@ -17,7 +17,7 @@ function Layout(props) {
 const ContentContainer = styled.main`
   width: 100%;
   height: auto;
-  margin: 56px auto;
+  margin: 0 auto;
 `;
 
 export default Layout;

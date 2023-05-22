@@ -4,6 +4,7 @@ import Layout from './components/Layout/Layout';
 import LandingPage from './components/views/LandingPage/LandingPage';
 import LoginPage from './components/views/LoginPage/LoginPage';
 import RegisterPage from './components/views/RegisterPage/RegisterPage';
+import MovieDetail from './components/views/MovieDetail/MovieDetail';
 
 function App() {
   /**
@@ -14,6 +15,7 @@ function App() {
   const AuthenticLandingPage = Auth(LandingPage, null);
   const AuthenticLoginPage = Auth(LoginPage, false);
   const AuthenticRegisterPage = Auth(RegisterPage, false);
+  const AuthenticMovieDetail = Auth(MovieDetail, null);
 
   return (
     <Router>
@@ -22,6 +24,7 @@ function App() {
           <Route path="/" element={<AuthenticLandingPage />} />
           <Route path="/login" element={<AuthenticLoginPage />} />
           <Route path="/register" element={<AuthenticRegisterPage />} />
+          <Route path="/movie/:movieId" element={<AuthenticMovieDetail />} />
         </Routes>
       </Layout>
     </Router>

@@ -10,7 +10,7 @@ function Navbar() {
       <Container>
         <LeftContainer>
           <Logo>
-            <Link to="/">eunhye</Link>
+            <Link to="/">cgvoing</Link>
           </Logo>
           <LeftMenu />
         </LeftContainer>
@@ -25,9 +25,9 @@ function Navbar() {
 const Header = styled.nav`
   background-color: #fff;
   height: 56px;
-  position: fixed;
+  /* position: fixed;
   top: 0;
-  left: 0;
+  left: 0; */
   width: 100%;
   z-index: 1;
 `;

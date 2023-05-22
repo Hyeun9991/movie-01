@@ -7,7 +7,7 @@ function Footer() {
     <FooterWrapper>
       <Container>
         <Logo>
-          <Link to="/">eunhye</Link>
+          <Link to="/">cgvoing</Link>
         </Logo>
         <Menu>
           <li>
@@ -27,7 +27,8 @@ function Footer() {
 }
 
 const FooterWrapper = styled.div`
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
+  background-color: #000;
   width: 100%;
   height: 120px;
 `;
@@ -45,7 +46,7 @@ const Logo = styled.h1`
   align-items: center;
 
   a {
-    color: #000;
+    color: #fff;
     text-decoration: none;
     text-transform: uppercase;
     font-size: 14px;
@@ -61,7 +62,7 @@ const Menu = styled.ul`
   }
 
   a {
-    color: #000;
+    color: #fff;
     text-decoration: none;
     font-size: 14px;
     opacity: 0.7;
