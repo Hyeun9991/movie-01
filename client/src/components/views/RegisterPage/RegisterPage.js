@@ -110,7 +110,7 @@ function RegisterPage() {
 
 const Container = styled.div`
   width: 100%;
-  height: calc(100vh - 176px);
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;

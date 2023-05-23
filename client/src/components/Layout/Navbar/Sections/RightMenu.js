@@ -22,29 +22,23 @@ function RightMenu() {
     return (
       <Menu>
         <li>
-          <NavLink to="/login">Sign In</NavLink>
+          <NavLink to="/login">로그인</NavLink>
         </li>
         <li>
-          <NavLink to="/register">Sign Up</NavLink>
+          <NavLink to="/register">회원가입</NavLink>
         </li>
       </Menu>
     );
   } else {
     return (
       <Menu>
-        {/* <li>
-          <NavLink
-            className={({ isActive }) => (isActive ? 'active' : '')}
-            to="/video/upload"
-          >Video</NavLink>
-        </li> */}
         <li>
           <NavLink
             className={({ isActive }) => (isActive ? 'active' : '')}
             to="/logout"
             onClick={logoutHandler}
           >
-            Logout
+            로그아웃
           </NavLink>
         </li>
       </Menu>

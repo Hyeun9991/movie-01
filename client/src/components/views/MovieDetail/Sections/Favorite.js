@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function Favorite({ movieInfo, movieId, userFrom }) {
   const movieTitle = movieInfo.title;
-  const moviePost = movieInfo.backdrop_path;
+  const moviePost = movieInfo.poster_path;
   const movieRunTime = movieInfo.runtime;
 
   const [FavoriteNumber, setFavoriteNumber] = useState(0);

@@ -13,7 +13,7 @@ router.post('/favoriteNumber', async (req, res) => {
       movieId: req.body.movieId,
     }).exec();
 
-    res
+    return res
       .status(200)
       .json({ success: true, favoriteNumber: favoriteNumber.length });
   } catch (err) {
@@ -35,25 +35,26 @@ router.post('/favored', async (req, res) => {
       isFavored = true;
     }
 
-    res.status(200).json({ success: true, favored: isFavored });
+    return res.status(200).json({ success: true, favored: isFavored });
   } catch (err) {
     return res.status(400).send(err);
   }
 });
 
-// client에서 전달받은 favorite body를 Favorite Model에 저장
+// favorite 추가 -  client에서 전달받은 favorite body를 Favorite Model에 저장
 router.post('/addToFavorite', async (req, res) => {
   try {
     const favorite = new Favorite(req.body);
 
     await favorite.save();
 
-    res.status(200).json({ success: true });
+    return res.status(200).json({ success: true });
   } catch (err) {
     return res.status(400).send(err);
   }
 });
 
+// favorite 삭제 - Favorite Model에서 body에 해당하는 데이터를 찾고 제거
 router.post('/removeFromFavorite', async (req, res) => {
   try {
     const removeFavorite = await Favorite.findOneAndDelete({
@@ -61,7 +62,34 @@ router.post('/removeFromFavorite', async (req, res) => {
       userFrom: req.body.userFrom,
     }).exec();
 
-    res.status(200).json({ success: true, removeFavorite: removeFavorite });
+    return res.status(200).json({ success: true, removeFavorite });
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+});
+
+// 좋아요 누른 영화 정보들
+router.post('/getFavoredMovie', async (req, res) => {
+  try {
+    const favorites = await Favorite.find({
+      userFrom: req.body.userFrom,
+    }).exec();
+
+    return res.status(200).json({ success: true, favorites });
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+});
+
+// 좋아요 페이지에서 삭제버튼 눌렀을때
+router.post('/removeFromFavorite', async (req, res) => {
+  try {
+    const removeFavorite = await Favorite.findOneAndDelete({
+      movieId: req.body.movieId,
+      userFrom: req.body.userFrom,
+    }).exec();
+
+    return res.status(200).json({ success: true, removeFavorite });
   } catch (err) {
     return res.status(400).send(err);
   }

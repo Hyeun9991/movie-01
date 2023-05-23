@@ -5,14 +5,14 @@ import styled from 'styled-components';
 function LeftMenu() {
   return (
     <Menu>
-      {/* <li>
+      <li>
         <NavLink
           className={({ isActive }) => (isActive ? 'active' : '')}
-          to="/subscription"
+          to="/favorite"
         >
-          Subscription
+          좋아요
         </NavLink>
-      </li> */}
+      </li>
     </Menu>
   );
 }
