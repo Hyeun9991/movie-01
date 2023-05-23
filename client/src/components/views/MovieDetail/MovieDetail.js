@@ -6,7 +6,7 @@ import MovieInfo from './Sections/MovieInfo';
 import FullImage from '../commons/FullImage';
 import GridCards from '../commons/GridCards';
 import { BsArrowLeftShort } from 'react-icons/bs';
-import { AiFillHeart, AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineClose } from 'react-icons/ai';
 import Favorite from './Sections/Favorite';
 
 function MovieDetail() {
@@ -325,7 +325,7 @@ const BackButton = styled.button`
   }
 
   .icon {
-    font-size: 32px;
+    font-size: 38px;
   }
 `;
 
