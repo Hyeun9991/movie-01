@@ -70,22 +70,32 @@ function Favorite({ movieInfo, movieId, userFrom }) {
   };
 
   return (
-    <FavoriteButton
-      className={Favored ? 'favored-btn' : ''}
-      onClick={onClickFavorite}
-    >
-      {Favored ? (
-        <AiFillHeart className="icon favored-icon" />
-      ) : (
-        <AiOutlineHeart className="icon" />
-      )}
+    <FavoriteButtonContainer>
+      <FavoriteButton
+        className={Favored ? 'favored-btn' : ''}
+        onClick={onClickFavorite}
+      >
+        {Favored ? (
+          <AiFillHeart className="icon favored-icon" />
+        ) : (
+          <AiOutlineHeart className="icon" />
+        )}
+      </FavoriteButton>
+
       <FavoriteNumberText>
         {FavoriteNumber === 0 ? '' : FavoriteNumber}
       </FavoriteNumberText>
-    </FavoriteButton>
+    </FavoriteButtonContainer>
   );
 }
 
+const FavoriteButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+`;
 const FavoriteButton = styled.button`
   background-color: #ffffff30;
   backdrop-filter: blur(4px);
@@ -103,7 +113,6 @@ const FavoriteButton = styled.button`
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s;
-  position: relative;
 
   &:hover {
     background-color: #000;
@@ -115,16 +124,9 @@ const FavoriteButton = styled.button`
     }
   }
 
-  &.favored-btn {
-  }
-
   .icon {
-    font-size: 28px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
+    font-size: 24px;
+    transition: all 0.3s;
 
     &.favored-icon {
       color: #ff0048;
@@ -132,6 +134,13 @@ const FavoriteButton = styled.button`
   }
 `;
 const FavoriteNumberText = styled.span`
+  color: #fff;
   font-size: 12px;
+  z-index: 1;
+  opacity: 0.7;
+  position: absolute;
+  bottom: -0.3rem;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 export default Favorite;

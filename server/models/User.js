@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const saltRounds = 10; // saltRounds: salt가 몇 글자인지 정의
-const jwt = require("jsonwebtoken");
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const saltRounds = 10; // salt가 몇 글자인지 정의
 
 const userSchema = mongoose.Schema({
   name: {
@@ -35,13 +35,12 @@ const userSchema = mongoose.Schema({
   },
 });
 
-// User 모델의 password 필드가 변경될 때만 해당 비밀번호를 암호화해서 저장하는 코드
-// save() 메소드가 실행되기 전에 pre-hook 함수를 실행
-userSchema.pre("save", function (next) {
+// 회원가입 중 client에서 전달한 body를 DB에 저장하기 전에 실행되는 코드
+userSchema.pre('save', function (next) {
   var user = this;
 
   // User Model안 field중에 password가 변환 될 때만 실행
-  if (user.isModified("password")) {
+  if (user.isModified('password')) {
     // 비밀번호를 암호화
     bcrypt.genSalt(saltRounds, function (err, salt) {
       if (err) return next(err);
@@ -72,9 +71,17 @@ userSchema.methods.comparePassword = async function (plainPassword) {
 userSchema.methods.generateToken = async function () {
   const user = this;
 
-  const token = jwt.sign(user._id.toHexString(), "secretToken");
+  // 현재 시간에 12시간을 더한 만료 시간 설정
+  const expirationTime = Date.now() + 12 * 60 * 60 * 1000; // 12시간 (12 * 60 * 60 * 1000 milliseconds)
+
+  // 비밀 키를 사용하여 JWT를 생성하고 만료 시간(expirationTime) 설정
+  const token = jwt.sign(
+    { userId: user._id.toHexString(), exp: expirationTime },
+    'secretToken'
+  );
 
   user.token = token;
+  user.tokenExp = expirationTime;
   await user.save();
 
   return token;
@@ -88,8 +95,9 @@ userSchema.statics.findByToken = async function (token) {
   // 클라이언트에서 가져온 token과 DB에 보관된 토큰이 일치하는지 확인
 
   try {
-    const decoded = jwt.verify(token, "secretToken");
-    const foundUser = await user.findOne({ _id: decoded, token: token });
+    // 비밀 키를 사용하여 JWT를 복호화
+    const decoded = jwt.verify(token, 'secretToken');
+    const foundUser = await user.findOne({ _id: decoded.userId, token: token });
     return foundUser;
   } catch (err) {
     throw err;
@@ -97,6 +105,6 @@ userSchema.statics.findByToken = async function (token) {
 };
 
 // model로 schema 감싸기
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = { User };

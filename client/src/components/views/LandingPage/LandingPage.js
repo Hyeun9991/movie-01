@@ -10,9 +10,17 @@ function LandingPage() {
   const [MainMovieImage, setMainMovieImage] = useState(null);
   const [CurrentPage, setCurrentPage] = useState(0);
 
+  /**
+   * endpoints
+   * now_playing: 현재 상영중인 영화 목록
+   * popular: 인기순으로 정렬된 영화 목록
+   * top_rated: 등급별로 정렬된 영화 목록
+   * upcoming: 곧 개봉할 영화 목록
+   */
+
   useEffect(() => {
     // load되자마자 첫 번째 페이지(page=1)를 파라미터로 줌
-    const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=ko&page=1`;
+    const endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=ko&page=1`;
     fetchMovies(endpoint);
   }, []);
 
@@ -23,7 +31,12 @@ function LandingPage() {
       .then((response) => {
         // ...: 리스트 내부에 있는 element들을 풀어주는 연산자
         // setMovies([...response.results]); // 덮어씌움 (lead more 버튼을 눌러서 데이터를 가져와도 기존 데이터에 덮어씌인다.)
-        setMovies([...Movies, ...response.results]); // 두 리스트를 순서대로 합침
+
+        // 평점순으로 정렬
+        const sortedMovies = response.results.sort(
+          (a, b) => b.vote_average - a.vote_average
+        );
+        setMovies([...Movies, ...sortedMovies]); // 두 리스트를 순서대로 합침
 
         // 첫 번째 페이지의 첫 번째 영화 포스터 이미지로 MainMovie State Update
         if (response.page === 1) {
@@ -35,7 +48,7 @@ function LandingPage() {
   };
 
   const loadMoreItems = () => {
-    const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=ko&page=${
+    const endpoint = `${API_URL}movie/now_playing?api_key=${API_KEY}&language=ko&page=${
       CurrentPage + 1
     }`;
     fetchMovies(endpoint);
@@ -54,7 +67,7 @@ function LandingPage() {
         )}
 
         <MainMoviesContainer>
-          <SectionTitle>Movies by latest</SectionTitle>
+          <SectionTitle>상영중인 영화</SectionTitle>
 
           {/* Movie Grid Cards */}
           <RowContainer>

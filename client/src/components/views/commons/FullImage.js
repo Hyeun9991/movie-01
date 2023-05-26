@@ -8,9 +8,9 @@ function FullImage({ image, children }) {
 const FullImageContainer = styled.div`
   background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0) 39%,
+      rgba(0, 0, 0, 0) 21%,
       rgba(0, 0, 0, 0) 41%,
-      rgba(0, 0, 0, 0.65) 100%,
+      rgba(0, 0, 0, 0.7) 100%,
       #1c1c1c
     ),
     url(${(props) => props.image});

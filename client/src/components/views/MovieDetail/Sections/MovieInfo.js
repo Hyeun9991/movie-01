@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { AiFillStar } from 'react-icons/ai';
 
@@ -9,20 +9,7 @@ function MovieInfo({ movie }) {
   const releaseDate = movie.release_date;
   const voteAverage = movie.vote_average;
   const voteCount = movie.vote_count;
-  const genreList = () => {
-    if (movie.genres) {
-      const genres = movie.genres.map((genre) => genre.name);
-
-      return (
-        <GenresList>
-          {genres.map((genre, index) => (
-            <span key={index}>{genre}</span>
-          ))}
-        </GenresList>
-      );
-    }
-  };
-  const movieGenres = genreList();
+  const movieGenres = movie.genres && movie.genres.map((genre) => genre.name);
 
   return (
     <Container className="movie-info-container">
@@ -39,7 +26,12 @@ function MovieInfo({ movie }) {
           <InfoItem>
             <InfoText>{runTime}m</InfoText>
           </InfoItem>
-          <InfoItem>{movieGenres}</InfoItem>
+          <InfoItem>
+            {movieGenres &&
+              movieGenres.map((genre) => {
+                return <InfoText key={genre}>{genre}</InfoText>;
+              })}
+          </InfoItem>
           <InfoItem>
             <InfoText>{releaseDate}</InfoText>
           </InfoItem>
@@ -51,7 +43,6 @@ function MovieInfo({ movie }) {
 }
 
 const Container = styled.div`
-  width: 50%;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -60,7 +51,7 @@ const Container = styled.div`
 `;
 
 const MovieTitle = styled.h1`
-  font-size: 48px;
+  font-size: 45px;
 `;
 
 const DetailContainer = styled.div`
@@ -107,18 +98,14 @@ const InfoList = styled.ul`
   list-style: none;
   gap: 1rem;
 `;
-const InfoItem = styled.li``;
+const InfoItem = styled.li`
+  display: flex;
+  gap: 0.5rem;
+`;
 const InfoText = styled.span`
   font-size: 14px;
   opacity: 0.7;
   line-height: 1.2rem;
-`;
-
-const GenresList = styled.div`
-  display: flex;
-  font-size: 14px;
-  gap: 0.5rem;
-  opacity: 0.7;
 `;
 
 export default MovieInfo;

@@ -24,7 +24,7 @@ function GridCards({
       // first Actors
       <FirstActorContainer className="actor-item">
         <ActorProfileImageContainer>
-          <img src={image} alt={firstCharacterName} />
+          <ActorProfileImage src={image} alt={firstCharacterName} />
         </ActorProfileImageContainer>
         <ActorName>{firstCharacterName}</ActorName>
       </FirstActorContainer>
@@ -34,7 +34,7 @@ function GridCards({
       // Actor col
       <MoreActorContainer className="actor-item">
         <ActorProfileImageContainer>
-          <img src={image} alt={firstCharacterName} />
+          <ActorProfileImage src={image} alt={firstCharacterName} />
         </ActorProfileImageContainer>
         <ActorName>{MoreCharacterName}</ActorName>
       </MoreActorContainer>
@@ -80,20 +80,19 @@ const MoreActorContainer = styled.div`
   flex-wrap: wrap;
 `;
 const ActorProfileImageContainer = styled.div`
+  background-color: #ddd;
   width: 55px;
   height: 55px;
   position: relative;
   overflow: hidden;
   border-radius: 50%;
-
-  img {
-    background-color: #000;
-    position: absolute;
-    top: -0.5rem;
-    left: 0;
-    width: 100%;
-    filter: grayscale(100%);
-  }
+`;
+const ActorProfileImage = styled.img`
+  position: absolute;
+  top: -0.5rem;
+  left: 0;
+  width: 100%;
+  filter: grayscale(100%);
 `;
 const ActorName = styled.span`
   font-size: 12px;
